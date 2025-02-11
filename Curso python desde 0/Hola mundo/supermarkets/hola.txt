@@ -1,0 +1,6 @@
+1,Nombre,Edad,Ciudad,Rol,Salario
+2,Juan,25,Bogotá,Ingeniero,3000
+3,María,30,Medellín,Doctora,4000
+4,Carlos,22,Cali,Diseñador,2800
+5,Ana,28,Barranquilla,Arquitecta,3500
+6,Luis,35,Bucaramanga,Abogado,4200
