@@ -606,8 +606,9 @@ def main():
         else:
             print("Opción no válida. Intenta de nuevo.")
 
-if __name__ == "__main__":
-    main()
+'''if __name__ == "__main__":
+    main()'''
+
 #registro_estudiante()    
 #registro_acudiente()
 #registro_profesor()
