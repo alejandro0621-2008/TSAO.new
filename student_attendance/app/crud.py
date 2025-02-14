@@ -609,7 +609,7 @@ def main():
 '''if __name__ == "__main__":
     main()'''
 
-#registro_estudiante()    
+registro_estudiante()    
 #registro_acudiente()
 #registro_profesor()
 #cambiar_estado_asistencia()
