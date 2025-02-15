@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 14-02-2025 a las 20:03:48
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-02-2025 a las 22:54:31
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `TSAO`
+-- Base de datos: `tsao`
 --
 
 -- --------------------------------------------------------
@@ -62,6 +62,13 @@ CREATE TABLE `asistencias` (
   `Id_estud4` int(11) NOT NULL,
   `Curso2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `asistencias`
+--
+
+INSERT INTO `asistencias` (`Nombre_Asis`, `Id_Asis`, `Fecha_Asis`, `Hora_Entrada`, `Hora_Salida`, `Estado_Asis`, `Id_estud4`, `Curso2`) VALUES
+('helloo', 27, '2025-02-14', '16:27:46', NULL, 'Ausente', 24, 1);
 
 -- --------------------------------------------------------
 
@@ -133,6 +140,13 @@ CREATE TABLE `inasistencias` (
   `fecha_ina` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `inasistencias`
+--
+
+INSERT INTO `inasistencias` (`Id_inasistencia`, `Id_estud`, `Motivo_inasistencia`, `Dias_inasistencia`, `Incapacidad_ina`, `id_curso3`, `fecha_ina`) VALUES
+(104, 24, 'estaba lloviendo muy fuerte', 1, '', 1, '2025-02-14');
+
 -- --------------------------------------------------------
 
 --
@@ -141,10 +155,19 @@ CREATE TABLE `inasistencias` (
 
 CREATE TABLE `profesores` (
   `id_profesor` int(11) NOT NULL,
+  `nombre_pro` varchar(25) NOT NULL,
+  `apellido_pro` varchar(25) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
   `fecha_contratacion` date DEFAULT NULL,
   `asignatura` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `profesores`
+--
+
+INSERT INTO `profesores` (`id_profesor`, `nombre_pro`, `apellido_pro`, `id_usuario`, `fecha_contratacion`, `asignatura`) VALUES
+(14, '', '', 73, '2023-08-14', 'Matematicas');
 
 -- --------------------------------------------------------
 
@@ -189,7 +212,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`Id_user`, `Correo_user`, `Telefono_user`, `Contraseña_user`, `Id_rol2`) VALUES
 (68, 'papepe@gmail.com', 24244424, 'peloteuwu', 4),
-(69, 'isabella@gmail.com', 2321824, 'isalomejor', 4),
+(69, 'isabella@gmail.com', 2321824, '$2b$12$JWE0Rwt7L8Y9KvxUTgqaEun7RM8KcZqnbtWXMqaFgK/aGELafKZz.', 4),
 (70, 'juliana@gmail.com', 312234567, 'juli234', 4),
 (71, 'agustin@gmail.com', 1234567, 'thebest56', 4),
 (72, 'pkilisos@gmail.com', 987654, 'pkilous34', 4),
@@ -276,7 +299,7 @@ ALTER TABLE `acudientes`
 -- AUTO_INCREMENT de la tabla `asistencias`
 --
 ALTER TABLE `asistencias`
-  MODIFY `Id_Asis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `Id_Asis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -294,13 +317,13 @@ ALTER TABLE `estudiantes`
 -- AUTO_INCREMENT de la tabla `inasistencias`
 --
 ALTER TABLE `inasistencias`
-  MODIFY `Id_inasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `Id_inasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de la tabla `profesores`
 --
 ALTER TABLE `profesores`
-  MODIFY `id_profesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_profesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
