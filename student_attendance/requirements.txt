@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-sqlalchemy
-pymysql
-mysql-connector-python
-passlib[bcrypt]
-httpx
-flet
