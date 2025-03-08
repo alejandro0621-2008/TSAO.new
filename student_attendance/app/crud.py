@@ -13,7 +13,7 @@ def registro_acudiente():
         Apellido_acu = input("Introduce el apellido del acudiente: ")
         Genero_acu = input("Introduce el género del acudiente: ")
 
-        # Validación ID de usuario
+        # Validamos ID de usuario
         while True:
             Id_user_acu = input("Introduce el ID del usuario relacionado: ").strip()
             
@@ -21,19 +21,19 @@ def registro_acudiente():
                 print("El ID no puede estar vacío.")
                 continue
 
-            # Verificar existencia en usuarios
+            # Verificamos existencia en usuarios
             cursor.execute("SELECT Id_user FROM usuario WHERE Id_user = %s", (Id_user_acu,))
             if not cursor.fetchone():
                 print("Error: El usuario no existe.")
                 continue
 
-            # Verificar si ya está vinculado a otro acudiente
+            # Verificamos si el id ya está vinculado a otro acudiente
             cursor.execute("SELECT Id_user_acu FROM acudientes WHERE Id_user_acu = %s", (Id_user_acu,))
             if cursor.fetchone():
-                print("Error: Este usuario ya tiene un acudiente registrado.")
+                print("Error: Este usuario ya tiene otro acudiente registrado.")
                 continue
                 
-            break  # Si pasa ambas validaciones
+            break  
 
         # Validación de correo electrónico mejorada
         while True:
@@ -49,7 +49,7 @@ def registro_acudiente():
                 break
             print("El teléfono debe contener solo números y tener al menos 7 dígitos.")
 
-        # Inserción de datos
+        # Query e insersion de datos
         query = """
         INSERT INTO acudientes 
         (Nombre_acu, Id_user_acu, Apellido_acu, Genero_acu, Correo_acu, Telefono_acu)
@@ -127,9 +127,26 @@ def registro_estudiante():
     # Validamos Id_user_estu
     while True:
         Id_user_estu = input("Introduce el usuario del estudiante: ")
+        
         if not Id_user_estu.strip():
             print("Por favor, ingresa un valor.")
             continue
+
+        # Verificamos existencia en usuarios
+        cursor.execute("SELECT Id_user FROM usuario WHERE Id_user = %s", (Id_user_estu,))
+        if not cursor.fetchone():
+            print("Error: El usuario no existe.")
+            continue
+
+        # Verificamos si el id ya está vinculado a otro estudiante
+        cursor.execute("SELECT Id_user_estu FROM estudiantes WHERE Id_user_estu = %s", (Id_user_estu,))
+        if cursor.fetchone():
+            print("Error: Este usuario ya tiene otro estudiante registrado.")
+            continue
+                
+            break  
+
+        
 
         cursor = coneccion.cursor()
         query = "SELECT COUNT(*) FROM usuario WHERE Id_user = %s"
@@ -619,8 +636,8 @@ def main():
 '''if __name__ == "__main__":
     main()'''
 
-#registro_estudiante()    
-registro_acudiente()
+registro_estudiante()    
+#registro_acudiente()
 #registro_profesor()
 #cambiar_estado_asistencia()
 #registro_asistencia_estud()
