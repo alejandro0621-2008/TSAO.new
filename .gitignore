@@ -1,0 +1,6 @@
+.venv
+# Ignorar archivos de CodeGPT
+.codegpt/
+
+# Ignorar caché de pytest
+.pytest_cache/
