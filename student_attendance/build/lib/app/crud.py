@@ -60,36 +60,28 @@ def registro_acudiente():
 # Función para crear registro de estudiante
 def registro_estudiante():
     coneccion = conexion()
+    cursor = coneccion.cursor()
 
     print("A continuación, los datos que ingresarás serán los pertenecientes al estudiante")
 
     # Validamos Id_curso2
-    # Mostrar los Cursos disponibles
     while True:
-        cursor = coneccion.cursor()
         cursor.execute("SELECT Id_curso, Nombre_cur FROM curso;")
         rows = cursor.fetchall()
 
         print("\nCursos disponibles:")
         for row in rows:
             print(f"ID: {row[0]}, Nombre: {row[1]}")
-    
 
         Id_curso2 = input("Introduce el ID del curso al que pertenece el estudiante: ")
-        
-    
 
-    # Validar que se haya ingresado un valor
         if not Id_curso2.strip():
             print("Por favor, ingresa un valor.")
             continue
 
-    # Verificar si el ID proporcionado existe en la tabla de cursos
-        query = "SELECT COUNT(*) FROM curso WHERE Id_curso = %s"
-        cursor.execute(query, (Id_curso2,))
-        result = cursor.fetchone()
-
-        if result[0] > 0:
+        # Verificar si el curso existe
+        cursor.execute("SELECT COUNT(*) FROM curso WHERE Id_curso = %s", (Id_curso2,))
+        if cursor.fetchone()[0] > 0:
             print("Curso válido.")
             break
         else:
@@ -98,17 +90,13 @@ def registro_estudiante():
     # Validamos Id_acudiente2
     while True:
         Id_acudiente2 = input("Introduce el ID del acudiente del estudiante: ")
+
         if not Id_acudiente2.strip():
             print("Por favor, ingresa un valor.")
             continue
 
-        # Verificamos si el ID proporcionado existe en la tabla relacionada
-        cursor = coneccion.cursor()
-        query = "SELECT COUNT(*) FROM acudientes WHERE Id_acu = %s"
-        cursor.execute(query, (Id_acudiente2,))
-        result = cursor.fetchone()
-
-        if result[0] > 0:
+        cursor.execute("SELECT COUNT(*) FROM acudientes WHERE Id_acu = %s", (Id_acudiente2,))
+        if cursor.fetchone()[0] > 0:
             print("Acudiente válido.")
             break
         else:
@@ -117,38 +105,40 @@ def registro_estudiante():
     # Validamos Id_user_estu
     while True:
         Id_user_estu = input("Introduce el usuario del estudiante: ")
+
         if not Id_user_estu.strip():
             print("Por favor, ingresa un valor.")
             continue
 
+        # Verificar rol del usuario y si ya está registrado en estudiantes
         cursor.execute("""
-            SELECT Id_rol2 FROM usuario WHERE id_user = %s) AS
+            SELECT 
+                Id_rol2,
+                EXISTS (SELECT 1 FROM estudiantes WHERE Id_user_estu = %s) AS es_duplicado
             FROM usuario
             WHERE Id_user = %s
-    """, (Id_user_estu,))
+        """, (Id_user_estu, Id_user_estu))
+        
         resultado = cursor.fetchone()
 
         if resultado:
-            Id_rol = resultado [0]
-            if Id_rol in [2, 4]:
-                print("El usuario ya esta registrado como profesor o acudiente.Intenta con otro usuario")
+            id_rol, es_duplicado = resultado
+
+            if id_rol in [2, 4]:  # Verificar si es profesor o acudiente
+                print("El usuario ya está registrado como profesor o acudiente. Intenta con otro usuario.")
                 continue
-            else:
-                print("usuario valido")
-            break
 
-     # Verificamos si el ID proporcionado existe en la tabla usuarios
-        cursor = coneccion.cursor()
-        query = "SELECT COUNT(*) FROM usuario WHERE Id_user = %s"
-        cursor.execute(query, (Id_user_estu))
-        result = cursor.fetchone()
+            if es_duplicado:
+                print("Este usuario ya está registrado como estudiante. No se puede duplicar.")
+                continue
 
-        if result[0] > 0:  # Si el ID existe
-            print("Usuario válido.")
+            print("Usuario válido para ser registrado.")
             break
         else:
             print("ID de usuario no válido. Por favor, intenta nuevamente.")
-            break
+
+    print("\n✅ Registro validado correctamente. Puedes proceder con la inserción del estudiante.")
+
 
 
     Nombre_estud = input("Introduce el nombre del estudiante: ")
@@ -627,7 +617,7 @@ def main():
 
 '''if __name__ == "__main__":
     main() '''
-#registro estudiante()
+registro_estudiante()
 #registro_profesor()
 #cambiar_estado_asistencia()
 #registro_asistencia_estud()
