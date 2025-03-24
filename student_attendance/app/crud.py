@@ -202,7 +202,7 @@ def registro_estudiante():
 def registro_profesor():
     coneccion = conexion()
    
-    '''while True:
+    while True:
         Id_user_prof = input("introduceel id de usuario")
 
         if not Id_user_prof.strip():
@@ -218,7 +218,7 @@ def registro_profesor():
             print("usuario valido.")
             break
         else: 
-            print("usuario invalido, ingresa un valor valido")'''
+            print("usuario invalido, ingresa un valor valido")
     while True:
         Id_user_profesores = input("Introduce el ID del usuario (docente) relacionado: ")
 
