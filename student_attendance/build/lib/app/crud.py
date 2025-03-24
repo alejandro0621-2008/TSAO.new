@@ -113,34 +113,33 @@ def registro_estudiante():
         # Verificar rol del usuario y si ya está registrado en estudiantes
         cursor.execute("""
             SELECT 
-                Id_rol2,
-                EXISTS (SELECT 1 FROM estudiantes WHERE Id_user_estu = %s) AS es_duplicado
+                Id_rol2
             FROM usuario
             WHERE Id_user = %s
-        """, (Id_user_estu, Id_user_estu))
+        """, (Id_user_estu,))
         
         resultado = cursor.fetchone()
 
         if resultado:
-            id_rol, es_duplicado = resultado
+            id_rol = resultado [0]
 
             if id_rol in [2, 4]:  # Verificar si es profesor o acudiente
                 print("El usuario ya está registrado como profesor o acudiente. Intenta con otro usuario.")
                 continue
+        cursor.execute("SELECT COUNT(*) FROM usuario WHERE Id_user = %s", (Id_user_estu,))
 
-            if es_duplicado:
-                print("Este usuario ya está registrado como estudiante. No se puede duplicar.")
-                continue
+        resul = cursor.fetchone()
 
-            print("Usuario válido para ser registrado.")
-            break
+        if resul [0] > 0:
+           print ("Usuario valido para ser registrado como estudiante")
+           break
+
         else:
-            print("ID de usuario no válido. Por favor, intenta nuevamente.")
-
-    print("\n✅ Registro validado correctamente. Puedes proceder con la inserción del estudiante.")
-
+            print ("ID usuario no valido. Por favor intente nuevamente")
+            break
 
 
+          
     Nombre_estud = input("Introduce el nombre del estudiante: ")
     Apellido_estud = input("Introduce el apellido del estudiante: ")
 
