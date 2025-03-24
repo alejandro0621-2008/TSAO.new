@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-02-2025 a las 22:54:31
+-- Tiempo de generación: 24-03-2025 a las 02:33:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -63,13 +63,6 @@ CREATE TABLE `asistencias` (
   `Curso2` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `asistencias`
---
-
-INSERT INTO `asistencias` (`Nombre_Asis`, `Id_Asis`, `Fecha_Asis`, `Hora_Entrada`, `Hora_Salida`, `Estado_Asis`, `Id_estud4`, `Curso2`) VALUES
-('helloo', 27, '2025-02-14', '16:27:46', NULL, 'Ausente', 24, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -122,7 +115,8 @@ CREATE TABLE `estudiantes` (
 --
 
 INSERT INTO `estudiantes` (`Id_estud`, `Id_curso2`, `Id_acudiente2`, `Id_user_estu`, `Nombre_estud`, `Apellido_estud`, `FechaDNaci_estud`, `Genero_estud`, `Telefono_estud`, `Correo_estud`) VALUES
-(24, 1, 40, 73, 'Santiago', 'Valencia', '2008-08-14', 'Masculino', '3117227580', 'wjhfekjhe@gmail.com');
+(27, 1, 40, 77, 'isabella', 'villegas rosero', '2007-08-14', 'Femenino', '448364364', 'isabellav@gmail.com'),
+(30, 1, 40, 80, 'Juliana', 'Cuadros', '2008-05-13', 'Femenino', '6542', 'chavela@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -139,13 +133,6 @@ CREATE TABLE `inasistencias` (
   `id_curso3` int(11) DEFAULT NULL,
   `fecha_ina` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `inasistencias`
---
-
-INSERT INTO `inasistencias` (`Id_inasistencia`, `Id_estud`, `Motivo_inasistencia`, `Dias_inasistencia`, `Incapacidad_ina`, `id_curso3`, `fecha_ina`) VALUES
-(104, 24, 'estaba lloviendo muy fuerte', 1, '', 1, '2025-02-14');
 
 -- --------------------------------------------------------
 
@@ -167,7 +154,7 @@ CREATE TABLE `profesores` (
 --
 
 INSERT INTO `profesores` (`id_profesor`, `nombre_pro`, `apellido_pro`, `id_usuario`, `fecha_contratacion`, `asignatura`) VALUES
-(14, '', '', 73, '2023-08-14', 'Matematicas');
+(17, 'isabella', 'villegas', 78, '2020-03-04', 'Matematicas');
 
 -- --------------------------------------------------------
 
@@ -213,10 +200,12 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`Id_user`, `Correo_user`, `Telefono_user`, `Contraseña_user`, `Id_rol2`) VALUES
 (68, 'papepe@gmail.com', 24244424, 'peloteuwu', 4),
 (69, 'isabella@gmail.com', 2321824, '$2b$12$JWE0Rwt7L8Y9KvxUTgqaEun7RM8KcZqnbtWXMqaFgK/aGELafKZz.', 4),
-(70, 'juliana@gmail.com', 312234567, 'juli234', 4),
+(70, 'juliana@gmail.com', 312234567, '$2b$12$i3o4P78d8Mcm61wT0QHtNOMfIfqQa4hFvrgnC7bSNOnGu.pEAPdia', 4),
 (71, 'agustin@gmail.com', 1234567, 'thebest56', 4),
 (72, 'pkilisos@gmail.com', 987654, 'pkilous34', 4),
-(73, 'saracav@gmail.com', 67890543, 'saraville1', 4);
+(77, 'isav@gmail.com', 644398, 'isa123', 3),
+(78, 'isav@gmail.com', 5664536, 'isa123', 2),
+(80, 'chavela@gmail.com', 5454, 'isa123', 3);
 
 --
 -- Índices para tablas volcadas
@@ -293,13 +282,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `acudientes`
 --
 ALTER TABLE `acudientes`
-  MODIFY `Id_acu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `Id_acu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `asistencias`
 --
 ALTER TABLE `asistencias`
-  MODIFY `Id_Asis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `Id_Asis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `curso`
@@ -311,19 +300,19 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de la tabla `estudiantes`
 --
 ALTER TABLE `estudiantes`
-  MODIFY `Id_estud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Id_estud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `inasistencias`
 --
 ALTER TABLE `inasistencias`
-  MODIFY `Id_inasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `Id_inasistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT de la tabla `profesores`
 --
 ALTER TABLE `profesores`
-  MODIFY `id_profesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_profesor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -335,7 +324,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `Id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- Restricciones para tablas volcadas

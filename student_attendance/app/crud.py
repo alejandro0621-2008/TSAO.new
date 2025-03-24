@@ -3,103 +3,85 @@ from datetime import datetime
 from passlib.context import CryptContext
 
 
+# Función para crear un nuevo registro de acudiente
 def registro_acudiente():
-    coneccion = conexion()
-    cursor = coneccion.cursor()
+    # Establecer la conexión de nuevo 
+    coneccion = conexion()  # función de conexión
+    Nombre_acu = input("Introduce el nombre del acudiente: ")
+    Apellido_acu = input("Introduce el apellido del acudiente: ")
+    Genero_acu = input("Introduce el género del acudiente: ")
 
-    try:
-        # Datos básicos
-        Nombre_acu = input("Introduce el nombre del acudiente: ")
-        Apellido_acu = input("Introduce el apellido del acudiente: ")
-        Genero_acu = input("Introduce el género del acudiente: ")
+    # Validamos Id_user_acu
+    while True:
+        Id_user_acu = input("Introduce el ID del usuario (acudiente) relacionado: ")
 
-        # Validamos ID de usuario
-        while True:
-            Id_user_acu = input("Introduce el ID del usuario relacionado: ").strip()
-            
-            if not Id_user_acu:
-                print("El ID no puede estar vacío.")
-                continue
+        if not Id_user_acu.strip():
+            print("Por favor, ingresa un valor.")
+            continue
 
-            # Verificamos existencia en usuarios
-            cursor.execute("SELECT Id_user FROM usuario WHERE Id_user = %s", (Id_user_acu,))
-            if not cursor.fetchone():
-                print("Error: El usuario no existe.")
-                continue
+        # Verificamos si el ID proporcionado existe en la tabla usuarios
+        cursor = coneccion.cursor()
+        query = "SELECT COUNT(*) FROM usuario WHERE Id_user = %s"
+        cursor.execute(query, (Id_user_acu,))
+        result = cursor.fetchone()
 
-            # Verificamos si el id ya está vinculado a otro acudiente
-            cursor.execute("SELECT Id_user_acu FROM acudientes WHERE Id_user_acu = %s", (Id_user_acu,))
-            if cursor.fetchone():
-                print("Error: Este usuario ya tiene otro acudiente registrado.")
-                continue
-                
-            break  
+        if result[0] > 0:  # Si el ID existe
+            print("Usuario válido.")
+            break
+        else:
+            print("ID de usuario no válido. Por favor, intenta nuevamente.")
 
-        # Validación de correo electrónico mejorada
-        while True:
-            Correo_acu = input("Introduce el correo del acudiente: ").strip()
-            if "@" in Correo_acu and "." in Correo_acu.split("@")[-1]:
-                break
-            print("Formato de correo inválido. Ejemplo válido: usuario@dominio.com")
+    # Loop para confirmar una dirección electrónica válida
+    while True:
+        Correo_acu = input("Introduce el correo del acudiente: ")
 
-        # Validación de teléfono
-        while True:
-            Telefono_acu = input("Introduce el teléfono del acudiente: ").strip()
-            if Telefono_acu.isdigit() and len(Telefono_acu) >= 7:
-                break
-            print("El teléfono debe contener solo números y tener al menos 7 dígitos.")
+        if "@" in Correo_acu:
+            break
+        else:
+            print("Introduce una dirección de correo electrónico válida.")
 
-        # Query e insersion de datos
-        query = """
-        INSERT INTO acudientes 
-        (Nombre_acu, Id_user_acu, Apellido_acu, Genero_acu, Correo_acu, Telefono_acu)
-        VALUES (%s, %s, %s, %s, %s, %s)
-        """
-        cursor.execute(query, (Nombre_acu, Id_user_acu, Apellido_acu, Genero_acu, Correo_acu, Telefono_acu))
-        coneccion.commit()
+    print("Correo electrónico registrado correctamente", Correo_acu)
 
-        print(f"\n¡Registro exitoso! Acudiente: {Nombre_acu} {Apellido_acu}")
+    Telefono_acu = input("Introduce el teléfono del acudiente: ")
+    query = """
+    INSERT INTO acudientes (Nombre_acu, Id_user_acu, Apellido_acu, Genero_acu, Correo_acu, Telefono_acu)
+    VALUES (%s, %s, %s, %s, %s, %s)
+    """
 
-    except Exception as e:
-        coneccion.rollback()
-        print(f"\nError en el registro: {str(e)}")  
-    finally:
-        cursor.close()
-        coneccion.close()
+    cursor = coneccion.cursor() 
+    # Ejecutamos la consulta con los valores que requerimos
+    cursor.execute(query, (Nombre_acu, Id_user_acu, Apellido_acu, Genero_acu, Correo_acu, Telefono_acu))
+    coneccion.commit()  # Guardamos los cambios
+
+    print(f"El acudiente: {Nombre_acu} {Apellido_acu} ha sido registrado con éxito")
+
+
 
 # Función para crear registro de estudiante
 def registro_estudiante():
     coneccion = conexion()
+    cursor = coneccion.cursor()
 
     print("A continuación, los datos que ingresarás serán los pertenecientes al estudiante")
 
     # Validamos Id_curso2
-    # Mostrar los Cursos disponibles
     while True:
-        cursor = coneccion.cursor()
         cursor.execute("SELECT Id_curso, Nombre_cur FROM curso;")
         rows = cursor.fetchall()
 
         print("\nCursos disponibles:")
         for row in rows:
             print(f"ID: {row[0]}, Nombre: {row[1]}")
-    
 
         Id_curso2 = input("Introduce el ID del curso al que pertenece el estudiante: ")
-        
-    
 
-    # Validar que se haya ingresado un valor
         if not Id_curso2.strip():
             print("Por favor, ingresa un valor.")
             continue
 
-    # Verificar si el ID proporcionado existe en la tabla de cursos
-        query = "SELECT COUNT(*) FROM curso WHERE Id_curso = %s"
-        cursor.execute(query, (Id_curso2,))
-        result = cursor.fetchone()
-
-        if result[0] > 0:
+        # Verificar si el curso existe
+        cursor.execute("SELECT COUNT(*) FROM curso WHERE Id_curso = %s", (Id_curso2,))
+        if cursor.fetchone()[0] > 0:
             print("Curso válido.")
             break
         else:
@@ -108,17 +90,13 @@ def registro_estudiante():
     # Validamos Id_acudiente2
     while True:
         Id_acudiente2 = input("Introduce el ID del acudiente del estudiante: ")
+
         if not Id_acudiente2.strip():
             print("Por favor, ingresa un valor.")
             continue
 
-        # Verificamos si el ID proporcionado existe en la tabla relacionada
-        cursor = coneccion.cursor()
-        query = "SELECT COUNT(*) FROM acudientes WHERE Id_acu = %s"
-        cursor.execute(query, (Id_acudiente2,))
-        result = cursor.fetchone()
-
-        if result[0] > 0:
+        cursor.execute("SELECT COUNT(*) FROM acudientes WHERE Id_acu = %s", (Id_acudiente2,))
+        if cursor.fetchone()[0] > 0:
             print("Acudiente válido.")
             break
         else:
@@ -127,11 +105,11 @@ def registro_estudiante():
     # Validamos Id_user_estu
     while True:
         Id_user_estu = input("Introduce el usuario del estudiante: ")
-        
+
         if not Id_user_estu.strip():
             print("Por favor, ingresa un valor.")
             continue
-
+        
         # Verificamos existencia en usuarios
         cursor.execute("SELECT Id_user FROM usuario WHERE Id_user = %s", (Id_user_estu,))
         if not cursor.fetchone():
@@ -141,24 +119,38 @@ def registro_estudiante():
         # Verificamos si el id ya está vinculado a otro estudiante
         cursor.execute("SELECT Id_user_estu FROM estudiantes WHERE Id_user_estu = %s", (Id_user_estu,))
         if cursor.fetchone():
-            print("Error: Este usuario ya tiene otro estudiante registrado.")
-            continue
-                
-            break  
+             print("Error: Este usuario ya tiene otro estudiante registrado.")
+             continue
+                 
+             break  
 
+
+        # Verificar rol del usuario y si ya está registrado en estudiantes
+        cursor.execute("""
+            SELECT Id_rol2 FROM usuario WHERE Id_user = %s """, (Id_user_estu,))
         
+        resultado = cursor.fetchone()
 
-        cursor = coneccion.cursor()
-        query = "SELECT COUNT(*) FROM usuario WHERE Id_user = %s"
-        cursor.execute(query, (Id_user_estu,))
-        result = cursor.fetchone()
+        if resultado:
+            id_rol = resultado [0]
 
-        if result[0] > 0:
-            print("Usuario válido.")
-            break
+            if id_rol in [2, 4]:  # Verificar si es profesor o acudiente
+                print("El usuario ya está registrado como profesor o acudiente. Intenta con otro usuario.")
+                continue
+        cursor.execute("SELECT COUNT(*) FROM usuario WHERE Id_user = %s", (Id_user_estu,))
+
+        resul = cursor.fetchone()
+
+        if resul [0] > 0:
+           print ("Usuario valido para ser registrado como estudiante")
+           break
+
         else:
-            print("ID de usuario no válido. Por favor, intenta nuevamente.")
+            print ("ID usuario no valido. Por favor intente nuevamente")
+            break
 
+
+          
     Nombre_estud = input("Introduce el nombre del estudiante: ")
     Apellido_estud = input("Introduce el apellido del estudiante: ")
 
@@ -634,13 +626,12 @@ def main():
             print("Opción no válida. Intenta de nuevo.")
 
 '''if __name__ == "__main__":
-    main()'''
-
-registro_estudiante()    
-#registro_acudiente()
+    main() '''
+registro_estudiante()
 #registro_profesor()
 #cambiar_estado_asistencia()
 #registro_asistencia_estud()
+#registro_acudiente()
 
 
 
