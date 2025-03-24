@@ -139,6 +139,7 @@ def registro_estudiante():
             break
 
 
+          
     Nombre_estud = input("Introduce el nombre del estudiante: ")
     Apellido_estud = input("Introduce el apellido del estudiante: ")
 
