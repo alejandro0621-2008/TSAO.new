@@ -1,6 +1,11 @@
-.venv
+# Ignorar entornos virtuales
+venv/
+.venv/
+env/
+
 # Ignorar archivos de CodeGPT
 .codegpt/
 
 # Ignorar caché de pytest
 .pytest_cache/
+.Curso python desde 0/
