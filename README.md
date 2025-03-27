@@ -1,11 +1,11 @@
-#Lista de asistencia-TSAO
+# Lista de asistencia-TSAO
 
-####Descripcion de nuestro proyecto:
+#### Descripcion de nuestro proyecto:
 <P>
 Nuestro proyecto busca que el llamado asistencia convencional o tradicional se cambie por un sistema de llamado virtual el cual proporcione comodidades tanto como para el docente como para el estudiante y que con este se eviten los incovenientes como perder tiempo en los llamados a asistencia
 </P>
 
-##Requisitos Previos
+## Requisitos Previos
 En este apartado se encuentran las tecnologias o herramientas necesarias para ejecutar el proyecto
 
 #### Plataformas para el backend:
@@ -18,7 +18,7 @@ En este apartado se encuentran las tecnologias o herramientas necesarias para ej
 - flet
 
 
-##Instrucciones de instalacion:
+## Instrucciones de instalacion:
 
 1. Clonar el repositorio mediante el siguiente comando
 
@@ -29,14 +29,14 @@ En este apartado se encuentran las tecnologias o herramientas necesarias para ej
 
 En este caso nuestro proyecto esta en python por lo tanto las dependecias se encuentran en un archivo "requerirments.txt" y se utiliza el siguiente comando
 
-#####pip install -r requirementes.txt
+#### #pip install -r requirementes.txt
 
 
 3. Configurar variables de entorno( si es necesario)
 
 Algunos proyectos requieren un archivo .env. Puedes crearlo copiando el archvio de ejemplo si existe
 
-#####cp .env. example .env
+##### cp .env. example .env
 
 
 
