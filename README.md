@@ -51,7 +51,7 @@ Para verificar que todo esta instalado correctamente, intenta ejecutar el proyec
 
 
 
-##Uso del proyecto
+## Uso del proyecto
 
 Para ejecutar la aplicación o el sistema, debes seguir un proceso estructurado dependiendo de si estás en un entorno de desarrollo o producción. A continuación, te explico paso a paso cómo hacerlo:
 
