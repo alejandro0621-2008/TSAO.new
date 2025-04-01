@@ -14,7 +14,7 @@ En este apartado se encuentran las tecnologias o herramientas necesarias para ej
 - MySQL
 - PHP MY ADMIN
 
-####Plataformas para el frontend:
+#### Plataformas para el frontend:
 - flet
 
 
