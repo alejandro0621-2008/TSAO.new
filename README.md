@@ -137,6 +137,25 @@ npm start
 Esto abrirá el frontend en http://localhost:3000/ (o el puerto configurado).
 
 
+⸻
+
+7. Pruebas y Validación
+1. Abrir el navegador y visitar http://localhost:3000/ para ver la interfaz del frontend.
+2. Probar la conexión con el backend revisando la consola del navegador o usando herramientas como Postman para hacer peticiones a http://localhost:5000/api/....
+3. Revisar la base de datos y asegurarte de que está funcionando correctamente.
+
+⸻
+
+8. Desplegar en Producción (Opcional)
+
+Cuando el sistema esté listo, puedes desplegarlo en la nube:
+• Frontend: Vercel, Netlify, Firebase Hosting.
+• Backend: Heroku, AWS, DigitalOcean.
+• Base de Datos: MongoDB Atlas, Supabase, PostgreSQL en la nube.
+
+
+
+
 
 
 
@@ -541,18 +560,45 @@ def registro_asistencia_estud():
     print(f"🏷️ Nombre: {nombre_asistencia} | 🟢 Estado: {estado_seleccionado}")
 
 
-⸻
 
-7. Pruebas y Validación
-1. Abrir el navegador y visitar http://localhost:3000/ para ver la interfaz del frontend.
-2. Probar la conexión con el backend revisando la consola del navegador o usando herramientas como Postman para hacer peticiones a http://localhost:5000/api/....
-3. Revisar la base de datos y asegurarte de que está funcionando correctamente.
 
-⸻
 
-8. Desplegar en Producción (Opcional)
 
-Cuando el sistema esté listo, puedes desplegarlo en la nube:
-• Frontend: Vercel, Netlify, Firebase Hosting.
-• Backend: Heroku, AWS, DigitalOcean.
-• Base de Datos: MongoDB Atlas, Supabase, PostgreSQL en la nube.
+
+## Cambiar estado de asistencia
+
+
+
+def cambiar_estado_asistencia():
+    coneccion = conexion()
+    cursor = coneccion.cursor()
+
+    try:
+        # Consulta optimizada con alias claros
+        cursor.execute("""
+            SELECT 
+                a.Id_Asis AS id_asistencia,
+                a.Nombre_Asis AS nombre_asistencia,
+                a.Fecha_Asis AS fecha,
+                a.Estado_Asis AS estado,
+                e.Id_estud AS id_estudiante,
+                CONCAT(e.Nombre_estud, ' ', e.Apellido_estud) AS estudiante,
+                c.Id_curso AS id_curso,
+                c.Nombre_cur AS curso
+            FROM asistencias a
+            INNER JOIN estudiantes e ON a.Id_estud4 = e.Id_estud
+            INNER JOIN curso c ON a.Curso2 = c.Id_curso
+            ORDER BY a.Fecha_Asis DESC
+        """)
+        asistencias = cursor.fetchall()
+
+        if not asistencias:
+            print("⚠️ No hay registros de asistencia")
+            return
+
+
+
+
+
+
+
