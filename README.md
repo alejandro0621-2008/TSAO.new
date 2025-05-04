@@ -179,6 +179,21 @@ Este fragmento de codigo define una funciona llamada REGISTRO DE ACUDIENTE esta 
 
 
 
+Este fragmento de Python está pensado para pedirte el ID de un usuario (estudiante) y verificar en la base de datos que ese usuario no tenga uno de los roles prohibidos (Admin, Profesor o Estudiante)
+
+
+
+
+![RA2 ](https://github.com/user-attachments/assets/bd0ece36-5dfc-4e52-b755-24321a199c04)
+
+
+
+Pide y valida un ID de usuario existente que no sea Admin/Profesor/Estudiante y no esté duplicado en la tabla de acudientes, valida que el correo tenga formato mínimo (@), recoge datos adicionales (teléfono), inserta un nuevo registro en la tabla acudientes y confirma al usuario que todo salió bien.
+
+
+
+
+
 
 
 
@@ -187,7 +202,41 @@ Este fragmento de codigo define una funciona llamada REGISTRO DE ACUDIENTE esta 
 ## Registro de estudiante
 
 
-empezamos con lo siguiente
+![RE1 ](https://github.com/user-attachments/assets/b7b52b66-ac40-46f8-95fe-638fb9dd82d1)
+
+
+
+
+
+Este código muestra al usuario los cursos disponibles, le pide el ID del curso al que pertenecerá el estudiante, valida que no deje el campo vacío, y comprueba en la base de datos que ese ID exista. Sólo cuando el ID es correcto abandona el bucle, dejando Id_curso2 listo para usarse en la inserción del nuevo registro de estudiante.
+
+
+
+
+
+![RA2 ](https://github.com/user-attachments/assets/5a1bd93a-ed21-490c-a97d-4271dff956b9)
+
+
+
+
+Antes de insertar un estudiante nuevo se asegura de que, El acudiente al que asociarás al estudiante exista en la tabla acudientes, el usuario que será el estudiante esté registrado en la tabla usuario y tenga un rol válido (luego comprobarías que efectivamente sea rol “estudiante” y que no esté duplicado).
+
+
+
+
+
+
+![RE3](https://github.com/user-attachments/assets/4179477f-ba66-455a-aac6-73315baa2924)
+
+
+
+
+Verifica que el usuario sea un estudiante válido y no esté duplicado, Recopila nombre, apellido, fecha de nacimiento (con formato estricto), género, teléfono y correo (con @), Inserta el nuevo estudiante en la tabla estudiantes de la base de datos y hace commit, informa por consola que el registro fue exitoso.
+
+
+
+
+
 
 
 
