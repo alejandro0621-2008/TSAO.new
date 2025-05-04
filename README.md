@@ -162,73 +162,17 @@ Cuando el sistema esté listo, puedes desplegarlo en la nube:
 
 ## Funcionalidades Basicas
 
-<p> Registro de un estudiante:
+<p> Registro de un acudiente:
 
-#### 
-    coneccion = conexion()  # Asume que esta función existe y retorna una conexión válida
 
-    Nombre_acu = input("Introduce el nombre del acudiente: ")
-    Apellido_acu = input("Introduce el apellido del acudiente: ")
-    Genero_acu = input("Introduce el género del acudiente: ")
+![Registro acudiente 1](https://github.com/user-attachments/assets/73b9e5fe-0892-4a25-b29b-60d497b15f08)
 
-    while True:
-        Id_user_acu = input("Introduce el ID del usuario (estudiante) relacionado: ").strip()
 
-        if not Id_user_acu:
-            print("Por favor, ingresa un valor.")
-            continue
 
-        cursor = coneccion.cursor()
 
-        cursor.execute("""
-        SELECT Id_rol2 FROM usuario WHERE Id_user = %s """, (Id_user_acu,))
+Este fragmento de codigo define una funciona llamada REGISTRO DE ACUDIENTE esta misma funcion crea una conexion a la base de datos, esta pide 3 datos los cuales quedan almacenados en las variables Nombre del acudiente, apellido y genero
 
-        resultado = cursor.fetchone()
-        if resultado:
-            id_rol = resultado[0]
 
-            # Asegurar que el usuario NO sea Admin (1), Profesor (2) o Estudiante (3)
-            if id_rol in [1, 2, 3]:  # Roles que NO pueden ser estudiantes
-                print("Error: El usuario es Admin, Profesor o Estudiante. Use otro ID.")
-                continue
-
-        else:
-            print("ID de usuario no existe. Intente de nuevo.")
-            continue
-
-        # Si el rol es 2 (acudiente), verificar si ya está registrado en acudientes
-        cursor.execute("SELECT Id_user_acu FROM acudientes WHERE Id_user_acu = %s", (Id_user_acu,))
-        if cursor.fetchone():
-            print("Error: Este usuario ya está registrado como acudiente.")
-            continue
-        print("Usuario válido para registrar como acudiente.")
-        break
-        
-
-        
-    # Loop para confirmar una dirección electrónica válida
-    while True:
-        Correo_acu = input("Introduce el correo del acudiente: ")
-
-        if "@" in Correo_acu:
-            break
-        else:
-            print("Introduce una dirección de correo electrónico válida.")
-
-    print("Correo electrónico registrado correctamente", Correo_acu)
-
-    Telefono_acu = input("Introduce el teléfono del acudiente: ")
-    query = """
-    INSERT INTO acudientes (Nombre_acu, Id_user_acu, Apellido_acu, Genero_acu, Correo_acu, Telefono_acu)
-    VALUES (%s, %s, %s, %s, %s, %s)
-    """
-
-    cursor = coneccion.cursor() 
-    # Ejecutamos la consulta con los valores que requerimos
-    cursor.execute(query, (Nombre_acu, Id_user_acu, Apellido_acu, Genero_acu, Correo_acu, Telefono_acu))
-    coneccion.commit()  # Guardamos los cambios
-
-    print(f"El acudiente: {Nombre_acu} {Apellido_acu} ha sido registrado con éxito")
 
 
 
