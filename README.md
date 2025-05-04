@@ -240,133 +240,42 @@ Verifica que el usuario sea un estudiante válido y no esté duplicado, Recopila
 
 
 
-
-def registro_estudiante():
-    coneccion = conexion()
-    cursor = coneccion.cursor()
-
-    print("A continuación, los datos que ingresarás serán los pertenecientes al estudiante")
-
-    # Validamos Id_curso2
-    while True:
-        cursor.execute("SELECT Id_curso, Nombre_cur FROM curso;")
-        rows = cursor.fetchall()
-
-        print("\nCursos disponibles:")
-        for row in rows:
-            print(f"ID: {row[0]}, Nombre: {row[1]}")
-
-        Id_curso2 = input("Introduce el ID del curso al que pertenece el estudiante: ")
-
-        if not Id_curso2.strip():
-            print("Por favor, ingresa un valor.")
-            continue
-
-        # Verificar si el curso existe
-        cursor.execute("SELECT COUNT(*) FROM curso WHERE Id_curso = %s", (Id_curso2,))
-        if cursor.fetchone()[0] > 0:
-            print("Curso válido.")
-            break
-        else:
-            print("ID del curso no válido. Por favor, intenta nuevamente.")
-
-    # Validamos Id_acudiente2
-    while True:
-        Id_acudiente2 = input("Introduce el ID del acudiente del estudiante: ")
-
-        if not Id_acudiente2.strip():
-            print("Por favor, ingresa un valor.")
-            continue
-
-        cursor.execute("SELECT COUNT(*) FROM acudientes WHERE Id_acu = %s", (Id_acudiente2,))
-        if cursor.fetchone()[0] > 0:
-            print("Acudiente válido.")
-            break
-        else:
-            print("ID de acudiente no válido. Por favor, intenta nuevamente.")
-
-    # Validamos Id_user_estu
-    while True:
-        Id_user_estu = input("Introduce el usuario del estudiante: ")
-
-        if not Id_user_estu.strip():
-            print("Por favor, ingresa un valor.")
-            continue
-        
-        # Verificamos existencia en usuarios
-        """cursor.execute("SELECT Id_user FROM usuario WHERE Id_user = %s", (Id_user_estu,))
-        if not cursor.fetchone():
-            print("Error: El usuario no existe.")
-            continue"""
-
-        "verificamos el rol y si ya esta registrado en estudiantes"
-        cursor.execute("""
-        SELECT Id_rol2 FROM usuario WHERE Id_user = %s """, (Id_user_estu,))
-
-        resultado = cursor.fetchone()
-        
-        if resultado: 
-             id_rol = resultado[0]
-
-         # Asegurar que el usuario NO sea Admin (1), Profesor (2) o Acudiente (4)
-             if id_rol in [1, 2, 4]:  # Roles que NO pueden ser estudiantes
-                print("Error: El usuario es Admin, Profesor o Acudiente. Use otro ID.")
-                continue
-        
-        else:
-            print("ID de usuario no existe. Intente de nuevo.")
-            continue
-        # Si el rol es 2 (estudiante), verificar si ya está registrado en estudiantes
-        cursor.execute("SELECT Id_user_estu FROM estudiantes WHERE Id_user_estu = %s", (Id_user_estu,))
-        if cursor.fetchone():
-            print("Error: Este usuario ya está registrado como estudiante.")
-            continue
-        print("Usuario válido para registrar como estudiante.")
-        break
-
-
-          
-    Nombre_estud = input("Introduce el nombre del estudiante: ")
-    Apellido_estud = input("Introduce el apellido del estudiante: ")
-
-    # Convertir la entrada de texto a un objeto datetime.date
-    while True:
-        FechaDNaci_estud = input("Introduce la fecha de nacimiento (YYYY-MM-DD): ")
-        try:
-            fecha_nacimiento = datetime.strptime(FechaDNaci_estud, "%Y-%m-%d").date()
-            print(f"Fecha de nacimiento: {fecha_nacimiento}")
-            break
-        except ValueError:
-            print("Formato de fecha incorrecto. Por favor, usa el formato YYYY-MM-DD.")
-
-    Genero_estud = input("Introduce el género del estudiante: ")
-    Telefono_estud = input("Introduce el teléfono del estudiante: ")
-
-    while True:
-        Correo_estud = input("Introduce el correo del estudiante: ")
-
-        if "@" in Correo_estud:
-            break
-        else:
-            print("Introduce una dirección de correo electrónico válida.")
-
-    print("Correo electrónico registrado correctamente", Correo_estud)
-
-    query = """
-    INSERT INTO estudiantes (Id_curso2, Id_acudiente2, Id_user_estu, Nombre_estud, Apellido_estud, FechaDNaci_estud, Genero_estud, Telefono_estud, Correo_estud)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """
-    cursor = coneccion.cursor()
-    cursor.execute(query, (Id_curso2, Id_acudiente2, Id_user_estu, Nombre_estud.title(), Apellido_estud.title(), FechaDNaci_estud, Genero_estud.capitalize(), Telefono_estud, Correo_estud))
-    coneccion.commit()  # Hacemos commit para guardar los cambios
-
-    print(f"El estudiante: {Nombre_estud} {Apellido_estud} ha sido registrado con éxito")
-
-
-
-
-
 ## Registro Profesores
+
+
+
+
+
+
+
+![RP1](https://github.com/user-attachments/assets/ea3e2dea-1b6e-4468-b0b0-563716f3cc6b)
+
+
+
+
+
+
+ste fragmento es el inicio de la función registro_profesor(), y su objetivo principal es pedir y validar el ID de usuario que se va a registrar como docente
+
+
+
+
+
+
+![RP2](https://github.com/user-attachments/assets/186b860e-6d21-4a71-8701-e5f81a14c104)
+
+
+
+
+
+Valida que el ID corresponda a un usuario con rol “Profesor” (descartando Admin, Estudiante y Acudiente) y que no esté duplicado, recoge nombre, apellido, fecha de contratación (formato estricto) y asignatura, inserta el nuevo registro en la tabla profesores y confirma la operación.
+
+
+
+
+
+
+
 
 
 def registro_profesor():
