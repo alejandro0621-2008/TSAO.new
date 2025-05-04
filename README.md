@@ -174,6 +174,11 @@ Este fragmento de codigo define una funciona llamada REGISTRO DE ACUDIENTE esta 
 
 
 
+![image](https://github.com/user-attachments/assets/f5b72948-eb5d-477c-bff7-21a01eb97012)
+
+
+
+
 
 
 
