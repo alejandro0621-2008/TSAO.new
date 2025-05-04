@@ -278,193 +278,50 @@ Valida que el ID corresponda a un usuario con rol “Profesor” (descartando Ad
 
 
 
-def registro_profesor():
-    coneccion = conexion()
-   
-    while True:
-        
-        Id_user_profesores = input("Introduce el ID del usuario (docente) relacionado: ")
-       
-        if not Id_user_profesores.strip():
-            print("Por favor, ingresa un valor.")
-            continue
-        
-        cursor = coneccion.cursor()
- 
-        # Verificar si el usuario ya está registrado como profesor
-        cursor.execute("""
-        SELECT Id_rol2 FROM usuario WHERE Id_user = %s """, (Id_user_profesores,))
-
-        resultado = cursor.fetchone()
-        if resultado:
-            id_rol = resultado[0]
-
-            # Asegurar que el usuario NO sea Admin (1), Acudiente (4) o Estudiante (3)
-            if id_rol in [1, 3, 4]:  # Roles que NO pueden ser estudiantes
-                print("Error: El usuario es Admin, Acudiente o Estudiante. Use otro ID.")
-                continue
-
-        else:
-            print("ID de usuario no existe. Intente de nuevo.")
-            continue
-
-        # verificar si el id ya está registrado en profesores
-        cursor.execute("SELECT id_usuario FROM profesores WHERE id_usuario = %s", (Id_user_profesores,))
-        if cursor.fetchone():
-            print("Error: Este usuario ya está registrado como profesor.")
-            continue
-        print("Usuario válido para registrar como profesor.")
-        break
-        
-    Nombre_profesor = input("Introduce el Nombre del (docente): ")
-    Apellido_profesor = input("Introduce el Apellido del (docente): ")
-    while True:
-        Fecha_contratacion = input("Introduce la fecha de contratacion del docente YYYY-MM-DD): ")
-        try:
-            Fecha_contrato = datetime.strptime(Fecha_contratacion, "%Y-%m-%d").date()
-            print(f"Fecha de nacimiento: {Fecha_contrato}")
-            break
-        except ValueError:
-            print("Formato de fecha incorrecto. Por favor, usa el formato YYYY-MM-DD.")
-
-    asignatura_prof = input("Ingresa la asignatura que da: ")
-
-    query = '''
-    INSERT INTO profesores (id_usuario, nombre_pro,	apellido_pro, fecha_contratacion, asignatura)
-    VALUES (%s, %s, %s,%s, %s)
-'''
-       cursor = coneccion.cursor()
-    cursor.execute(query,(Id_user_profesores, Nombre_profesor, Apellido_profesor,         Fecha_contratacion, asignatura_prof))
-    coneccion.commit()
-
-    print(f"El docente ha sido registrado con éxito")
-
 
 
 
 ## Registro asistencia
 
 
-def registro_asistencia_estud(): 
-    coneccion = conexion()
-    cursor = coneccion.cursor()
-   
-   # Obtener y mostrar cursos
-    cursor.execute("SELECT Id_curso, Nombre_cur, Grado FROM curso")
-    cursos = cursor.fetchall()
 
-    if not cursos:
-        print("⚠️ No hay cursos registrados.")
-        return
 
-    print("\n📚 Lista de Cursos:")
-    for i, curso in enumerate(cursos, 1):
-        print(f"[{i}] ID: {curso[0]} - {curso[1]} ({curso[2]})")
 
-    # Selección de curso
-    try:
-        seleccion = int(input("\n👉 Seleccione el número del curso: ")) - 1
-        id_curso = cursos[seleccion][0]
-    except (ValueError, IndexError):
-        print("❌ Selección inválida")
-        return
 
-    # Obtener estudiantes del curso
-    cursor.execute("""
-        SELECT Id_estud, Id_curso2, Id_acudiente2, Id_user_estu, 
-                Nombre_estud, Apellido_estud, FechaDNaci_estud, 
-                Genero_estud, Telefono_estud, Correo_estud 
-        FROM estudiantes 
-        WHERE Id_curso2 = %s
-        """, (id_curso,))
-        
-    estudiantes = cursor.fetchall()
 
-    if not estudiantes:
-        print("\n⚠️ No hay estudiantes en este curso.")
-        return
 
-    # Mostrar todos los estudiantes
-    print(f"\n🎓 Estudiantes del curso {cursos[seleccion][1]}:")
-    for j, est in enumerate(estudiantes, 1):
-        print(f"""
-[{j}] ID Estudiante: {est[0]}
-     Curso: {est[1]}
-     Acudiente: {est[2]}
-     Usuario: {est[3]}
-     Nombre: {est[4]} {est[5]}
-     Nacimiento: {est[6]}
-     Género: {est[7]}
-     Teléfono: {est[8]}
-     Email: {est[9]}
-            """)
-        print("-" * 50)  # Separador entre estudiantes
 
-# Selección de estudiante
-    try:
-        seleccion_est = int(input("\n👉 Seleccione el número del estudiante: ")) - 1
-        id_estudiante = estudiantes[seleccion_est][0]
-        nombre_estudiante = f"{estudiantes[seleccion_est][1]} {estudiantes[seleccion_est][2]}"
-        
-    except (ValueError, IndexError):
-        print("❌ Selección inválida")
-        return
 
-    # Obtener valores ENUM para Estado_Asis
-    cursor.execute("""
-        SELECT COLUMN_TYPE 
-        FROM INFORMATION_SCHEMA.COLUMNS 
-        WHERE TABLE_NAME = 'asistencias' 
-        AND COLUMN_NAME = 'Estado_Asis'
-    """)
-    enum_values = cursor.fetchone()[0]
-    estados = [valor.strip("'") for valor in enum_values.replace("enum(", "").replace(")", "").split(",")]
 
-    # Capturar datos de asistencia
-    nombre_asistencia = input("\n📝 Ingrese el nombre para la asistencia: ")
-        
-    print("\n🔄 Estado de asistencia:")
-    for i, estado in enumerate(estados, 1):
-        print(f"{i}. {estado}")
-        
-    try:
-        seleccion_estado = int(input("👉 Seleccione el estado: ")) - 1
-        estado_seleccionado = estados[seleccion_estado]
-    except (ValueError, IndexError):
-        print("❌ Selección inválida")
-        return
+![RAS1](https://github.com/user-attachments/assets/fce00d09-eadd-46f6-bb93-556045d1af75)
 
-    # Generar fecha y hora automáticas
-    now = datetime.now()
-    fecha_asis = now.strftime("%Y-%m-%d")
-    hora_entrada = now.strftime("%H:%M:%S")
 
-    # Insertar en la tabla asistencias
-    insert_query = """
-        INSERT INTO asistencias (
-            Nombre_Asis, 
-            Fecha_Asis, 
-            Hora_Entrada, 
-            Estado_Asis, 
-            Id_estud4, 
-            Curso2
-        ) VALUES (%s, %s, %s, %s, %s, %s)
-    """
 
-    valores = (
-        nombre_asistencia,
-        fecha_asis,
-        hora_entrada,
-        estado_seleccionado,
-        id_estudiante,
-        id_curso
-    )
 
-    cursor.execute(insert_query, valores)
-    coneccion.commit()
-    print(f"\n✅ Asistencia registrada exitosamente para {nombre_estudiante}")
-    print(f"📅 Fecha: {fecha_asis} | ⏰ Hora entrada: {hora_entrada}")
-    print(f"🏷️ Nombre: {nombre_asistencia} | 🟢 Estado: {estado_seleccionado}")
+
+esta función lista los cursos disponibles, deja que el usuario elija uno, recupera todos los estudiantes matriculados en ese curso, muestra sus datos completos, preparados para que a continuación puedas registrarles la asistencia.
+
+
+
+
+
+
+
+
+
+
+![RAS2](https://github.com/user-attachments/assets/6cb8bfca-d91c-4637-bac5-6d6a46526b8f)
+
+
+
+
+
+sirve para registrar una entrada de asistencia de un estudiante en una base de datos.
+
+
+
+
+
 
 
 
@@ -475,33 +332,6 @@ def registro_asistencia_estud():
 ## Cambiar estado de asistencia
 
 
-
-def cambiar_estado_asistencia():
-    coneccion = conexion()
-    cursor = coneccion.cursor()
-
-    try:
-        # Consulta optimizada con alias claros
-        cursor.execute("""
-            SELECT 
-                a.Id_Asis AS id_asistencia,
-                a.Nombre_Asis AS nombre_asistencia,
-                a.Fecha_Asis AS fecha,
-                a.Estado_Asis AS estado,
-                e.Id_estud AS id_estudiante,
-                CONCAT(e.Nombre_estud, ' ', e.Apellido_estud) AS estudiante,
-                c.Id_curso AS id_curso,
-                c.Nombre_cur AS curso
-            FROM asistencias a
-            INNER JOIN estudiantes e ON a.Id_estud4 = e.Id_estud
-            INNER JOIN curso c ON a.Curso2 = c.Id_curso
-            ORDER BY a.Fecha_Asis DESC
-        """)
-        asistencias = cursor.fetchall()
-
-        if not asistencias:
-            print("⚠️ No hay registros de asistencia")
-            return
 
 
 
