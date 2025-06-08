@@ -20,16 +20,20 @@ En este apartado se encuentran las tecnologias o herramientas necesarias para ej
 
 ## Instrucciones de instalacion:
 
-##### 1. Clonar el repositorio mediante el siguiente comando
+##### 1. Copiamos el enlace del repositorio en github y clonamos el repositorio mediante el siguiente comando
 
-#####git clone https://github.com/usuario/repo.git cd repo
+##### git clone https://github.com/usuario/repo.git cd repo
+
+
+![Clonar 1](https://github.com/user-attachments/assets/d9e39bd1-192f-44ff-bfdb-96937e8a8441)
+
 
 
 ##### 2. Instalar dependencias
 
 En este caso nuestro proyecto esta en python por lo tanto las dependecias se encuentran en un archivo "requerirments.txt" y se utiliza el siguiente comando
 
-#####pip install -r requirementes.txt
+##### pip install -r requirementes.txt
 
 
 ##### 3. Configurar variables de entorno( si es necesario)
