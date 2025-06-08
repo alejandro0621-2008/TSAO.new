@@ -22,7 +22,7 @@ En este apartado se encuentran las tecnologias o herramientas necesarias para ej
 
 ##### 1. Copiamos el enlace del repositorio en github y clonamos el repositorio mediante el siguiente comando
 
-##### git clone https://github.com/usuario/repo.git cd repo
+##### git clone https://github.com/alejandro0621-2008/TSAO.new.git cd repo
 
 
 ![Clonar 1](https://github.com/user-attachments/assets/d9e39bd1-192f-44ff-bfdb-96937e8a8441)
