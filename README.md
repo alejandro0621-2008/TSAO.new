@@ -29,6 +29,12 @@ En este apartado se encuentran las tecnologias o herramientas necesarias para ej
 
 
 
+
+![Clonar2](https://github.com/user-attachments/assets/1bb6be64-d271-4d68-af98-d19dc8ce6759)
+
+
+
+
 ##### 2. Instalar dependencias
 
 En este caso nuestro proyecto esta en python por lo tanto las dependecias se encuentran en un archivo "requerirments.txt" y se utiliza el siguiente comando
