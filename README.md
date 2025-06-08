@@ -177,7 +177,8 @@ Cuando el sistema esté listo, puedes desplegarlo en la nube:
 <p> Registro de un acudiente:
 
 
-![Registro acudiente 1](https://github.com/user-attachments/assets/73b9e5fe-0892-4a25-b29b-60d497b15f08)
+![Registro12](https://github.com/user-attachments/assets/70587099-1934-4ae7-8fcb-643ca08c4d36)
+
 
 
 
