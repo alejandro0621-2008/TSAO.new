@@ -28,7 +28,7 @@ En este apartado se encuentran las tecnologias o herramientas necesarias para ej
 ![Clonar 1](https://github.com/user-attachments/assets/d9e39bd1-192f-44ff-bfdb-96937e8a8441)
 
 
-
+##### Luego en nuestra terminal colocamos el comando con el enlace del repositorio que queremos clonar
 
 ![Clonar2](https://github.com/user-attachments/assets/1bb6be64-d271-4d68-af98-d19dc8ce6759)
 
@@ -42,11 +42,20 @@ En este caso nuestro proyecto esta en python por lo tanto las dependecias se enc
 ##### pip install -r requirementes.txt
 
 
-##### 3. Configurar variables de entorno( si es necesario)
 
-Algunos proyectos requieren un archivo .env. Puedes crearlo copiando el archvio de ejemplo si existe
+![requerimientos](https://github.com/user-attachments/assets/030380e7-8c27-4e83-9016-d74c9cf4602f)
 
-#####cp .env. example .env
+
+
+##### 3. Configurar entorno virtual
+
+Nuestro proyecto requiere un archivo de entorno virtaul a continuacipn el comando de como hacerlo
+
+##### pip install virtualenv
+
+
+![virtualenv](https://github.com/user-attachments/assets/899a087d-d28c-4444-b227-531bbf67f343)
+
 
 
 
