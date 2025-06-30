@@ -44,3 +44,22 @@ Registra un estudiante asociado a un curso y acudiente. Valida que el usuario es
 Permite registrar un profesor en la base de datos, asociándolo a un usuario existente y solicitando la fecha de contratación y asignatura.
 
 
+## Registro asistencia
+
+
+
+
+
+
+
+
+
+
+
+![RAS1](https://github.com/user-attachments/assets/fce00d09-eadd-46f6-bb93-556045d1af75)
+
+
+
+
+
+Permite seleccionar un curso, luego un estudiante de ese curso, y registrar su asistencia con estado (Asistió, Ausente, etc.), guardando fecha y hora.
