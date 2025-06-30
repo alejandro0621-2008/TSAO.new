@@ -1,4 +1,4 @@
-## Funciones princiàles
+## Funciones principales
 
 
 
@@ -10,3 +10,18 @@ Registro de un acudiente:
 
 
 Registra a un acudiente (padre/tutor) validando que el ID de usuario exista, solicitando datos personales y guardándolos en la tabla acudientes.
+
+
+
+
+
+## Registro de estudiante
+
+
+![RE1 ](https://github.com/user-attachments/assets/b7b52b66-ac40-46f8-95fe-638fb9dd82d1)
+
+
+
+Registra un estudiante asociado a un curso y acudiente. Valida que el usuario esté disponible, no se repita, y que tenga un rol adecuado.
+
+
