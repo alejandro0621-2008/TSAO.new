@@ -342,8 +342,9 @@ sirve para registrar una entrada de asistencia de un estudiante en una base de d
 
 
 
-## Cambiar estado de asistencia
+## Funciones principales de nuestra aplicacion
 
+https://github.com/alejandro0621-2008/TSAO.new/blob/main/Funciones%20principales.md
 
 
 
