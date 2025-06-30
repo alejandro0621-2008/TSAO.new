@@ -63,3 +63,40 @@ Permite registrar un profesor en la base de datos, asociándolo a un usuario exi
 
 
 Permite seleccionar un curso, luego un estudiante de ese curso, y registrar su asistencia con estado (Asistió, Ausente, etc.), guardando fecha y hora.
+
+
+
+
+
+
+## Cambiar estado de asistencia
+
+
+![Cambioestado](https://github.com/user-attachments/assets/d24869ad-d15a-4c0d-a505-3cfe9ebef9df)
+
+
+
+Muestra registros previos de asistencia y permite modificar su estado. Si se marca "Ausente", permite justificar e inserta una entrada en inasistencias.
+
+
+
+
+## Login user
+
+
+
+![loginuser ](https://github.com/user-attachments/assets/66b46850-d333-40d9-8408-41be8568d9b5)
+
+
+
+Verifica si el correo de usuario existe.
+
+
+
+
+
+
+
+
+
+
