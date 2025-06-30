@@ -25,3 +25,22 @@ Registra a un acudiente (padre/tutor) validando que el ID de usuario exista, sol
 Registra un estudiante asociado a un curso y acudiente. Valida que el usuario esté disponible, no se repita, y que tenga un rol adecuado.
 
 
+
+
+
+## Registro Profesores
+
+
+
+
+
+
+
+![RP1](https://github.com/user-attachments/assets/ea3e2dea-1b6e-4468-b0b0-563716f3cc6b)
+
+
+
+
+Permite registrar un profesor en la base de datos, asociándolo a un usuario existente y solicitando la fecha de contratación y asignatura.
+
+
