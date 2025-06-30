@@ -176,7 +176,7 @@ https://github.com/alejandro0621-2008/TSAO.new/blob/main/Funciones%20principales
 
 ## Widgets principales
 
-https://github.com/alejandro0621-2008/TSAO.new/edit/main/widgets.md
+https://github.com/alejandro0621-2008/TSAO.new/blob/main/widgets.md
 
 
 
