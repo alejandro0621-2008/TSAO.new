@@ -114,7 +114,7 @@ cp .env.example .env
 Luego, edita el archivo .env y agrega las configuraciones necesarias (puerto del servidor, claves API, credenciales de la base de datos, etc.).
 
 
-##### 4. Iniciar la Base de Datos (Si es Necesario)
+##### 4. Iniciar la Base de Datos 
 
 Si la aplicación usa una base de datos como MySQL o PostgreSQL, debes iniciarla:
 
@@ -125,8 +125,6 @@ CREATE DATABASE nombre_de_la_base;
 
 
 
-
-⸻
 
 ##### 5. Iniciar el Backend
 
@@ -151,10 +149,6 @@ Esto abrirá el frontend en http://localhost:3000/ (o el puerto configurado).
 
 
 
-7. Pruebas y Validación
-1. Abrir el navegador y visitar http://localhost:3000/ para ver la interfaz del frontend.
-2. Probar la conexión con el backend revisando la consola del navegador o usando herramientas como Postman para hacer peticiones a http://localhost:5000/api/....
-3. Revisar la base de datos y asegurarte 
 
 
 
