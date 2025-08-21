@@ -78,7 +78,7 @@ Para ejecutar la aplicación o el sistema, debes seguir un proceso estructurado 
 ##### 1. Verificar los Requisitos Previos
 
 Antes de ejecutar el sistema, asegúrate de que tienes instalado lo siguiente:
-✅ Node.js y npm/yarn (para frontend y backend en JavaScript).
+
 ✅ Base de datos (MySQL, PostgreSQL,)
 
 
@@ -128,7 +128,7 @@ CREATE DATABASE nombre_de_la_base;
 
 ##### 5. Iniciar el Backend
 
-Si el backend está en Node.js
+
 
 cd backend
 npm start
@@ -140,7 +140,6 @@ El backend debería ejecutarse en http://localhost:5000/ (o el puerto que hayas 
 
 ##### 6. Iniciar el Frontend
 
-Para React, Vue o Angular, ejecuta:
 
 cd frontend
 npm start
