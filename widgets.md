@@ -64,6 +64,21 @@ Este bloque implementa validación de correo y captura de teléfono en consola
 
 
 
+## 5 
+
+
+
+
+<img width="2254" height="634" alt="cargardesdelabase1" src="https://github.com/user-attachments/assets/7ddaaf37-b5dd-4562-8ce1-1f9ad36a92ff" />
+
+
+
+
+
+Este código se conecta a la base de datos, ejecuta una consulta SQL sobre la tabla acudientes y guarda todos los registros en rows para luego poder mostrarlos o procesarlos.
+
+
+
 
 
 
